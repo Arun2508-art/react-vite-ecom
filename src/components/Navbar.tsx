@@ -1,0 +1,109 @@
+import { IconChevronDown } from '@tabler/icons-react';
+import { useEffect, useState } from 'react';
+import { Link, NavLink } from 'react-router-dom';
+import Container from './Container';
+import NavIcons from './NavIcons';
+
+const navList = [
+  { name: 'Home', href: '/' },
+  { name: 'Men', href: '/men' },
+  { name: 'Women', href: '/women' },
+  { name: 'Electronics', href: '/electronics' },
+  {
+    name: 'Products',
+    option: [
+      { name: 'Add', href: '/add-product' },
+      { name: 'Update', href: '/update-product' },
+      { name: 'Product Details', href: '/product-details' },
+      { name: 'Product Checkout', href: '/product-checkout' }
+    ]
+  }
+];
+
+const Navbar = () => {
+  const [isSticky, setIsSticky] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const offset = window.scrollY;
+      const triggerHeight = 100;
+      setIsSticky(offset > triggerHeight);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  return (
+    <Container
+      className={`border-b border-gray-200 ${
+        isSticky ? 'fixed top-0 left-0 w-full animate-fadeInDown' : ''
+      } bg-white z-50 `}
+    >
+      <div className='flex items-center justify-between gap-8 h-full'>
+        <div className='flex items-center gap-12 focus-visible:outline-none'>
+          <Link
+            to='/'
+            className='flex items-center gap-3 focus-visible:outline-none'
+          >
+            <img src='/loder.webp' alt='' width={45} height={45} />
+            <div className='text-2xl tracking-wide uppercase font-semibold'>
+              Mathi
+            </div>
+          </Link>
+        </div>
+
+        <ul className='hidden lg:flex items-center gap-4 px-4'>
+          {navList.map((item) =>
+            item.option ? (
+              <li key={item.name} className='relative group'>
+                <div className='px-3 py-7 font-semibold flex items-center gap-1 cursor-pointer hover:text-red-500'>
+                  <span>{item.name}</span>
+                  <span className='mt-1'>
+                    <IconChevronDown width={14} height={14} stroke={3} />
+                  </span>
+                </div>
+                <ul className='opacity-0 invisible group-hover:visible group-hover:opacity-100 group-hover:top-full absolute top-1/2 w-45 bg-white p-4 z-50 rounded-md border-t-2 border-red-500 transition-all ease-out duration-300'>
+                  {item.option.map((sublist) => (
+                    <li key={sublist.name}>
+                      <NavLink
+                        to={sublist.href || ''}
+                        className={({ isActive }) =>
+                          `px-1 py-2 font-semibold hover:text-red-500 hover:tracking-wide block transition-all ease-out duration-300 ${
+                            isActive ? 'text-red-500' : ''
+                          }`
+                        }
+                      >
+                        {sublist.name}
+                      </NavLink>
+                    </li>
+                  ))}
+                </ul>
+              </li>
+            ) : (
+              <li>
+                <NavLink
+                  to={item.href || ''}
+                  className={({ isActive }) =>
+                    `px-3 py-7 font-semibold hover:text-red-500 transition-colors ${
+                      isActive ? 'text-red-500' : ''
+                    }`
+                  }
+                >
+                  {item.name}
+                </NavLink>
+              </li>
+            )
+          )}
+        </ul>
+
+        <div className='flex items-center justify-between gap-8 text-primary'>
+          {/* <SearchBar /> */}
+          <NavIcons />
+        </div>
+      </div>
+    </Container>
+  );
+};
+
+export default Navbar;
