@@ -8,7 +8,7 @@ export interface ContainerProps {
 
 const Container = ({ children, className }: ContainerProps) => {
   const containerClass = classNames(
-    'max-w-[1440px] my-0 mx-auto px-4 md:px-8 lg:px-16',
+    'max-w-[1620px] mx-auto px-4 md:px-8 lg:px-16',
     className
   );
 

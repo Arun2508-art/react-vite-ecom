@@ -1,46 +1,79 @@
 import { IconGardenCart, IconHeart } from '@tabler/icons-react';
-
-interface CardListProps {
-  title: string;
-  price: number;
-  image: string;
-}
+import { Link } from 'react-router-dom';
+import { useAppDispatch, useAppSelector } from '../store/hooks';
+import { addToCart, removeFromCart } from '../store/slice/cart';
+import type { ProductListProps } from '../store/slice/product';
+import { getOriginalPrice } from '../utils/helper';
+import Button from './Button';
+import StarRating from './StarRating';
 
 interface CardProps {
-  value: CardListProps;
+  product: ProductListProps;
 }
 
-const Card = ({ value }: CardProps) => {
-  const handleCart = (item: CardListProps) => {
-    console.log('cart', item);
+const Card = ({ product }: CardProps) => {
+  const dispatch = useAppDispatch();
+  const { cartList } = useAppSelector((state) => state.cart);
+
+  const handleCart = (item: ProductListProps) => {
+    const exists = cartList.some(
+      (val) => val.id === item.id && val.category === item.category
+    );
+
+    if (exists) {
+      dispatch(removeFromCart({ id: item.id, category: item.category }));
+    } else {
+      dispatch(addToCart(item));
+    }
   };
 
   return (
     <div className='w-full sm:w-1/2 md:w-1/3 lg:w-1/4'>
-      <div className='bg-white border border-gray-300 cursor-pointer m-3 rounded-lg group hover:shadow-md'>
-        <div className='overflow-hidden rounded-t-lg relative'>
+      <div className='bg-white border border-gray-300 m-3 rounded-lg hover:shadow-md'>
+        <Link
+          to={`/product/${product.id}`}
+          className='block overflow-hidden rounded-t-lg relative'
+        >
           <img
-            src={value.image}
+            src={product.thumbnail}
             className='w-full p-4 h-52 object-contain transition-all ease-out duration-300 hover:scale-110'
           />
-          <div className='absolute top-4 right-0 rounded-lg bg-blue-500 text-white p-2 transition-all ease-in duration-300 invisible opacity-0 hover:bg-red-500 group-hover:visible group-hover:opacity-100 group-hover:right-3'>
-            <IconHeart width={16} height={16} />
+          <div className='absolute top-0 right-0 p-1 rounded-bl-sm bg-red-500 text-white font-semibold text-xs'>
+            {product.discountPercentage}% Off
           </div>
-        </div>
-        <div className='pt-0 p-4 flex flex-col gap-2 border-t border-gray-300 group-hover:bg-gray-200'>
+        </Link>
+        <div className='pt-0 p-4 flex flex-col gap-2 border-t border-gray-300 group hover:bg-gray-100'>
           <h1 className='line-clamp-2 h-16 overflow-hidden pt-4'>
-            {value.title}
+            {product.title}
           </h1>
-          <div className='flex justify-between items-center'>
-            <h3 className='text-xl font-medium justify-end'>${value.price}</h3>
-            <button
-              className='rounded-lg bg-blue-500 text-white p-2 transition-all ease-in duration-300 invisible opacity-0 hover:bg-red-500 group-hover:visible group-hover:opacity-100'
-              onClick={() => {
-                handleCart(value);
-              }}
-            >
-              <IconGardenCart width={16} height={16} />
-            </button>
+          <div>
+            <StarRating rating={product.rating} />
+          </div>
+          <div className='flex justify-between items-baseline'>
+            <div className='flex items-center gap-1'>
+              <h3 className='text-xl font-medium'>${product.price}</h3>
+              <h3 className='text-sm line-through text-gray-500 decoration-gray-800'>
+                $
+                {getOriginalPrice(
+                  product.price,
+                  product.discountPercentage
+                ).toFixed(2)}
+              </h3>
+            </div>
+            <div className='flex items-center gap-2'>
+              <Button variant='secondary'>
+                <IconHeart width={16} height={16} />
+              </Button>
+              <Button
+                variant='secondary'
+                onClick={() => {
+                  handleCart(product);
+                }}
+                active={cartList.some((item) => item.id === product.id)}
+              >
+                <IconGardenCart width={16} height={16} />
+              </Button>
+            </div>
           </div>
         </div>
       </div>

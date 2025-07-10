@@ -1,53 +1,25 @@
 import { useState } from 'react';
 
-const slides = [
-  {
-    id: 1,
-    img: 'https://images.pexels.com/photos/1926769/pexels-photo-1926769.jpeg?auto=compress&cs=tinysrgb&w=800'
-  },
-  {
-    id: 2,
-    img: 'https://images.pexels.com/photos/1021693/pexels-photo-1021693.jpeg?auto=compress&cs=tinysrgb&w=800'
-  },
-  {
-    id: 3,
-    img: 'https://images.pexels.com/photos/1183266/pexels-photo-1183266.jpeg?auto=compress&cs=tinysrgb&w=800'
-  },
-  {
-    id: 4,
-    img: 'https://images.pexels.com/photos/1021693/pexels-photo-1021693.jpeg?auto=compress&cs=tinysrgb&w=800'
-  }
-];
-
-const ProductImages = () => {
+const ProductImages = ({ images }: { images: string[] }) => {
   const [index, setIndex] = useState(0);
 
   return (
-    <div>
-      <div className='h-[500px] relative'>
-        <img
-          src={slides[index].img}
-          alt=''
-          className='object-cover rounded-md'
-        />
+    <>
+      <div className='h-80'>
+        <img src={images[index]} alt='' className='rounded-md h-full w-full' />
       </div>
-      <div className='flex gap-8 mt-8 justify-between'>
-        {slides.map((img, i) => (
+      <div className='flex gap-2 mt-2 justify-between'>
+        {images.map((img, i) => (
           <div
-            className='w-1/4 h-24 relative gap-4 mt-8 cursor-pointer'
-            key={img.id}
+            className='w-1/4 h-24 cursor-pointer hover:shadow-md hover:rounded-md'
+            key={i}
             onClick={() => setIndex(i)}
           >
-            <img
-              src={img.img}
-              alt=''
-              sizes='30vw'
-              className='object-cover rounded-md'
-            />
+            <img src={img} alt='' className='rounded-md w-full h-24' />
           </div>
         ))}
       </div>
-    </div>
+    </>
   );
 };
 

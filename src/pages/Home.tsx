@@ -16,10 +16,8 @@ const HomePage = () => {
       </div> */}
       <Container className='flex flex-wrap mt-8 gap-y-4'>
         <CategoryCard label="Men's Fashion" imageName='items1.jpg' />
-        <CategoryCard label="Women's Fashion" imageName='items2.jpg' />
-        <CategoryCard label='Baby Fashion' imageName='items3.jpg' />
-        <CategoryCard label="Men's Fashion" imageName='items1.jpg' />
-        <CategoryCard label="Women's Fashion" imageName='items2.jpg' />
+        <CategoryCard label="Women's Fashion" imageName='items3.jpg' />
+        <CategoryCard label='Electronics' imageName='items2.jpg' />
       </Container>
       <FooterMessage />
     </>

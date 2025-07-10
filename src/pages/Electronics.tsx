@@ -5,7 +5,7 @@ import Loading from '../components/Loding';
 import { useAppDispatch, useAppSelector } from '../store/hooks';
 import { fetchProducts } from '../store/slice/product';
 
-const WomenHomepage = () => {
+const Electronics = () => {
   const dispatch = useAppDispatch();
   const { products, isLoading } = useAppSelector((state) => state.product);
 
@@ -13,19 +13,17 @@ const WomenHomepage = () => {
     dispatch(fetchProducts());
   }, [dispatch]);
 
-  const allowedWomensCategories = [
-    'womens-bags',
-    'womens-dresses',
-    'womens-jewellery',
-    'womens-shoes',
-    'womens-watches',
-    'tops'
+  const allowedElectronicsCategories = [
+    'laptops',
+    'smartphones',
+    'tablets',
+    'mobile-accessories'
   ];
 
   return (
     <Container className='mb-10'>
       <div className='my-8'>
-        <h1 className='font-semibold text-3xl'>Women's Clothing</h1>
+        <h1 className='font-semibold text-3xl'>Electronics</h1>
       </div>
       {isLoading ? (
         <Loading />
@@ -34,7 +32,7 @@ const WomenHomepage = () => {
           {products.length > 0 ? (
             products
               .filter((product) =>
-                allowedWomensCategories.includes(product.category)
+                allowedElectronicsCategories.includes(product.category)
               )
               .map((item) => <Card product={item} key={item.id} />)
           ) : (
@@ -46,4 +44,4 @@ const WomenHomepage = () => {
   );
 };
 
-export default WomenHomepage;
+export default Electronics;
