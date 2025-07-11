@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import type { ButtonHTMLAttributes, ReactNode } from 'react';
 
-type buttonVariant = 'primary' | 'secondary';
+type buttonVariant = 'primary' | 'secondary' | 'outline';
 
 type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
   children: ReactNode;
@@ -17,11 +17,13 @@ const Button = ({
   active,
   ...props
 }: ButtonProps) => {
-  const customClasses = classNames('text-white', className, {
-    'bg-black rounded-sm  p-3': variant === 'primary',
-    'bg-blue-500 rounded-lg p-2 transition-all ease-in duration-300 invisible opacity-0 hover:bg-red-500 group-hover:visible group-hover:opacity-100':
+  const customClasses = classNames('', className, {
+    'bg-black rounded-sm p-3 text-white': variant === 'primary',
+    'ring-1 ring-black hover:bg-black hover:text-white rounded-sm p-3':
+      variant === 'outline',
+    'bg-blue-500 text-white rounded-lg p-2 transition-all ease-in duration-300 md:invisible md:opacity-0 hover:bg-red-500 group-hover:visible group-hover:opacity-100':
       variant === 'secondary' && !active,
-    'bg-red-500 rounded-lg p-2 transition-all ease-in duration-300 invisible opacity-0 hover:bg-red-500 group-hover:visible group-hover:opacity-100':
+    'bg-red-500 text-white rounded-lg p-2 transition-all ease-in duration-300 md:invisible md:opacity-0 hover:bg-red-500 group-hover:visible group-hover:opacity-100':
       variant === 'secondary' && active
   });
   return (

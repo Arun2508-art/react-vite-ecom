@@ -1,61 +1,44 @@
-const Filter = () => {
+interface FilterButtonProps {
+  category: {
+    label: string;
+    value: string;
+  }[];
+  onClick: (value: string) => void;
+  onChange: (value: string) => void;
+  active?: string;
+}
+
+const Filter = ({ category, onClick, onChange, active }: FilterButtonProps) => {
   return (
-    <div className='mt-12 flex justify-between'>
-      <div className='flex gap-6 flex-wrap'>
-        <select
-          name='type'
-          id=''
-          className='py-2 px-4 rounded-2xl text-xs font-medium bg-[#EBEDED]'
-          //   onChange={handleFilterChange}
-        >
-          <option>Type</option>
-          <option value='physical'>Physical</option>
-          <option value='digital'>Digital</option>
-        </select>
-        <input
-          type='text'
-          name='min'
-          placeholder='min price'
-          className='text-xs rounded-2xl pl-2 w-24 ring-1 ring-gray-400'
-          //   onChange={handleFilterChange}
-        />
-        <input
-          type='text'
-          name='max'
-          placeholder='max price'
-          className='text-xs rounded-2xl pl-2 w-24 ring-1 ring-gray-400'
-          //   onChange={handleFilterChange}
-        />
-        {/* TODO: Filter Categories */}
-        <select
-          name='cat'
-          className='py-2 px-4 rounded-2xl text-xs font-medium bg-[#EBEDED]'
-          //   onChange={handleFilterChange}
-        >
-          <option>Category</option>
-          <option value=''>New Arrival</option>
-          <option value=''>Popular</option>
-        </select>
-        <select
-          name=''
-          id=''
-          className='py-2 px-4 rounded-2xl text-xs font-medium bg-[#EBEDED]'
-        >
-          <option>All Filters</option>
-        </select>
+    <div className='my-8 px-8 flex justify-between'>
+      <div>
+        <div className='text-xl font-semibold my-4'>Filters:</div>
+        <div className='flex gap-6 flex-wrap'>
+          {category.map((item) => (
+            <button
+              key={item.value}
+              className={`ring-1 ring-gray-600 rounded-md px-3 py-1 text-sm font-medium capitalize hover:bg-gray-600 hover:text-white ${
+                item.value === active ? 'bg-gray-800 text-white' : ''
+              }`}
+              onClick={() => onClick(item.value)}
+            >
+              {item.label}
+            </button>
+          ))}
+        </div>
       </div>
+
       <div className=''>
+        <div className='text-xl font-semibold my-4'>Sort by:</div>
         <select
           name='sort'
           id=''
-          className='py-2 px-4 rounded-2xl text-xs font-medium bg-white ring-1 ring-gray-400'
-          //   onChange={handleFilterChange}
+          className='select py-2 px-4 rounded-md text-sm font-medium bg-white ring-1 ring-gray-600 focus:outline-lime-700'
+          onChange={(e) => onChange(e.target.value)}
         >
-          <option>Sort By</option>
-          <option value='asc price'>Price (low to high)</option>
-          <option value='desc price'>Price (high to low)</option>
-          <option value='asc lastUpdated'>Newest</option>
-          <option value='desc lastUpdated'>Oldest</option>
+          <option value='normal'>Normal</option>
+          <option value='ascprice'>Price (low to high)</option>
+          <option value='descprice'>Price (high to low)</option>
         </select>
       </div>
     </div>

@@ -57,7 +57,7 @@ const Silder = () => {
           >
             {/* Text Container */}
             <div
-              className={`absolute ${
+              className={`hidden md:flex absolute ${
                 index % 2 === 0 ? 'right-14' : 'left-8'
               } h-full text-center flex gap-4 flex-col justify-center`}
             >
@@ -78,7 +78,13 @@ const Silder = () => {
             </div>
             {/* Image Container */}
             <div className='h-full w-full flex items-center justify-center'>
-              <img src={slide.img} alt='' width='100%' height={300} />
+              <img
+                src={slide.img}
+                alt={slide.title}
+                width='100%'
+                // height={300}
+                className='h-full'
+              />
             </div>
           </div>
         ))}

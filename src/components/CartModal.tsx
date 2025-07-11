@@ -1,7 +1,9 @@
 import { IconTrash, IconX } from '@tabler/icons-react';
 import type { Dispatch, SetStateAction } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../store/hooks';
 import { removeFromCart } from '../store/slice/cart';
+import { getTotalPrice } from '../utils/helper';
 import Button from './Button';
 
 interface CardModalProps {
@@ -11,27 +13,37 @@ interface CardModalProps {
 const CartModal = ({ hide }: CardModalProps) => {
   const dispatch = useAppDispatch();
   const { cartList } = useAppSelector((state) => state.cart);
+  const navigate = useNavigate();
 
   const handleClose = () => {
     hide(false);
   };
 
   const handleRemove = (id: number, category: string) => {
-    console.log(id, category);
     dispatch(removeFromCart({ id, category }));
   };
 
-  const totalPrice = cartList.reduce((acc, item) => acc + item.price, 0);
+  const handleCheckout = () => {
+    navigate('checkout');
+    hide(false);
+  };
+
+  const handleCart = () => {
+    navigate('cart');
+    hide(false);
+  };
+
+  const totalPrice = getTotalPrice(cartList);
 
   return (
     <div className='w-max absolute top-12 right-0 p-4 rounded-md shadow-[0_3px_20px_rgb(0,0,0,0.2)] z-20 flex flex-col gap-6 bg-white'>
       <div
-        className='fixed inset-0 bg-black/50 right-[400px]'
+        className='fixed top-0 left-0 h-screen bg-black/50 right-[400px]'
         onClick={handleClose}
       ></div>
       <div className='fixed top-0 right-0 w-[400px] h-screen bg-white p-4 flex flex-col overflow-y-auto'>
         <div className='flex items-center justify-between mb-8'>
-          <h2 className='text-xl'>Shopping Cart</h2>
+          <div className='text-xl font-semibold'>Shopping Cart</div>
           <button
             className='rounded-md hover:bg-red-500 p-2 hover:text-white cursor-pointer'
             onClick={handleClose}
@@ -49,7 +61,7 @@ const CartModal = ({ hide }: CardModalProps) => {
               <div className='flex gap-8'>
                 <img
                   src={item.thumbnail}
-                  alt=''
+                  alt={item.title}
                   width={72}
                   height={96}
                   className='object-cover rounded-md'
@@ -87,13 +99,16 @@ const CartModal = ({ hide }: CardModalProps) => {
         >
           <div className='flex justify-between items-center font-semibold'>
             <h3 className=''>Subtotal</h3>
-            <div>$ {totalPrice.toFixed(2)}</div>
+            <div>$ {totalPrice}</div>
           </div>
           <p className='mt-2 mb-4 text-gray-500'>
             Shipping and taxes calculated at checkout.
           </p>
           <div className='flex justify-end gap-8 text-sm'>
-            <Button>Check out</Button>
+            <Button variant='outline' onClick={handleCart}>
+              View Cart
+            </Button>
+            <Button onClick={handleCheckout}>Check out</Button>
           </div>
         </div>
       </div>

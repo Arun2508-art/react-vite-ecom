@@ -1,6 +1,6 @@
 import { IconChevronDown } from '@tabler/icons-react';
 import { useEffect, useState } from 'react';
-import { Link, NavLink } from 'react-router-dom';
+import { Link, NavLink, useLocation } from 'react-router-dom';
 import Container from './Container';
 import NavIcons from './NavIcons';
 
@@ -22,6 +22,7 @@ const navList = [
 
 const Navbar = () => {
   const [isSticky, setIsSticky] = useState(false);
+  const location = useLocation();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -47,7 +48,7 @@ const Navbar = () => {
               to='/'
               className='flex items-center gap-3 focus-visible:outline-none'
             >
-              <img src='/loder.webp' alt='' width={45} height={45} />
+              <img src='/loder.webp' alt='logo' width={45} height={45} />
               <div className='text-2xl tracking-wide uppercase font-semibold'>
                 Mathi
               </div>
@@ -55,47 +56,61 @@ const Navbar = () => {
           </div>
 
           <ul className='hidden lg:flex items-center gap-4 px-4'>
-            {navList.map((item) =>
-              item.option ? (
-                <li key={item.name} className='relative group'>
-                  <div className='px-3 py-7 font-semibold flex items-center gap-1 cursor-pointer hover:text-red-500'>
-                    <span>{item.name}</span>
-                    <span className='mt-1'>
-                      <IconChevronDown width={14} height={14} stroke={3} />
-                    </span>
-                  </div>
-                  <ul className='shadow-md opacity-0 invisible group-hover:visible group-hover:opacity-100 group-hover:top-full absolute top-1/2 w-45 bg-white p-4 z-50 rounded-md border-t-2 border-red-500 transition-all ease-out duration-300'>
-                    {item.option.map((sublist) => (
-                      <li key={sublist.name}>
-                        <NavLink
-                          to={sublist.href || ''}
-                          className={({ isActive }) =>
-                            `px-1 py-2 font-semibold hover:text-red-500 hover:tracking-wide block transition-all ease-out duration-300 ${
-                              isActive ? 'text-red-500' : ''
-                            }`
-                          }
-                        >
-                          {sublist.name}
-                        </NavLink>
-                      </li>
-                    ))}
-                  </ul>
-                </li>
-              ) : (
-                <li>
-                  <NavLink
-                    to={item.href || ''}
-                    className={({ isActive }) =>
-                      `px-3 py-7 font-semibold hover:text-red-500 transition-colors ${
-                        isActive ? 'text-red-500 border-b-2 border-red-500' : ''
-                      }`
-                    }
-                  >
-                    {item.name}
-                  </NavLink>
-                </li>
-              )
-            )}
+            {navList.map((item) => {
+              if (item.option) {
+                const isActiveSubmenu = location.pathname.includes('other');
+
+                return (
+                  <li key={item.name} className='relative group'>
+                    <div
+                      className={`px-3 py-7 font-semibold flex items-center gap-1 cursor-pointer hover:text-red-500 ${
+                        isActiveSubmenu
+                          ? 'text-red-500 border-b-2 border-red-500'
+                          : ''
+                      }`}
+                    >
+                      <span>{item.name}</span>
+                      <span className='mt-1'>
+                        <IconChevronDown width={14} height={14} stroke={3} />
+                      </span>
+                    </div>
+                    <ul className='shadow-md opacity-0 invisible mt-0.5 group-hover:visible group-hover:opacity-100 group-hover:top-full absolute top-1/2 w-45 bg-white p-4 z-50 rounded-md border-t-2 border-red-500 transition-all ease-out duration-300'>
+                      {item.option.map((sublist) => (
+                        <li key={sublist.name}>
+                          <NavLink
+                            to={sublist.href || ''}
+                            className={({ isActive }) =>
+                              `px-1 py-2 font-semibold hover:text-red-500 hover:tracking-wide block transition-all ease-out duration-300 ${
+                                isActive ? 'text-red-500' : ''
+                              }`
+                            }
+                          >
+                            {sublist.name}
+                          </NavLink>
+                        </li>
+                      ))}
+                    </ul>
+                  </li>
+                );
+              } else {
+                return (
+                  <li>
+                    <NavLink
+                      to={item.href || ''}
+                      className={({ isActive }) =>
+                        `px-3 py-7 font-semibold hover:text-red-500 transition-colors ${
+                          isActive
+                            ? 'text-red-500 border-b-2 border-red-500'
+                            : ''
+                        }`
+                      }
+                    >
+                      {item.name}
+                    </NavLink>
+                  </li>
+                );
+              }
+            })}
           </ul>
 
           <div className='flex items-center justify-between gap-8 text-primary'>

@@ -1,4 +1,5 @@
 import { IconGardenCart, IconHeart } from '@tabler/icons-react';
+import classNames from 'classnames';
 import { Link } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../store/hooks';
 import { addToCart, removeFromCart } from '../store/slice/cart';
@@ -9,9 +10,10 @@ import StarRating from './StarRating';
 
 interface CardProps {
   product: ProductListProps;
+  className?: string;
 }
 
-const Card = ({ product }: CardProps) => {
+const Card = ({ product, className }: CardProps) => {
   const dispatch = useAppDispatch();
   const { cartList } = useAppSelector((state) => state.cart);
 
@@ -27,11 +29,16 @@ const Card = ({ product }: CardProps) => {
     }
   };
 
+  const CardContainerClasses = classNames(
+    'w-full sm:w-1/2 md:w-1/3 lg:w-1/4',
+    className
+  );
+
   return (
-    <div className='w-full sm:w-1/2 md:w-1/3 lg:w-1/4'>
+    <div className={CardContainerClasses}>
       <div className='bg-white border border-gray-300 m-3 rounded-lg hover:shadow-md'>
         <Link
-          to={`/product/${product.id}`}
+          to={`/product/${product.category}/${product.id}`}
           className='block overflow-hidden rounded-t-lg relative'
         >
           <img
@@ -46,10 +53,13 @@ const Card = ({ product }: CardProps) => {
           <h1 className='line-clamp-2 h-16 overflow-hidden pt-4'>
             {product.title}
           </h1>
-          <div>
+          <div className='flex justify-between gap-4'>
             <StarRating rating={product.rating} />
+            <Button variant='secondary'>
+              <IconHeart width={16} height={16} />
+            </Button>
           </div>
-          <div className='flex justify-between items-baseline'>
+          <div className='flex justify-between items-baseline gap-4'>
             <div className='flex items-center gap-1'>
               <h3 className='text-xl font-medium'>${product.price}</h3>
               <h3 className='text-sm line-through text-gray-500 decoration-gray-800'>
@@ -61,9 +71,6 @@ const Card = ({ product }: CardProps) => {
               </h3>
             </div>
             <div className='flex items-center gap-2'>
-              <Button variant='secondary'>
-                <IconHeart width={16} height={16} />
-              </Button>
               <Button
                 variant='secondary'
                 onClick={() => {

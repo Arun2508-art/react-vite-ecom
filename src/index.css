@@ -19,3 +19,47 @@ button {
         }
     }
 }
+
+.select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    vertical-align: middle;
+    touch-action: manipulation;
+    text-overflow: ellipsis;
+    background-image: linear-gradient(45deg, #0000 50%, currentColor 50%), linear-gradient(135deg, currentColor 50%, #0000 50%);
+    background-position: calc(100% - 20px) calc(1px + 50%), calc(100% - 16.1px) calc(1px + 50%);
+    background-repeat: no-repeat;
+    background-size: 4px 4px, 4px 4px;
+    flex-shrink: 1;
+    align-items: center;
+    gap: 1rem;
+    padding-inline: 1rem 1.75rem;
+    font-size: .875rem;
+    display: inline-flex;
+    position: relative
+}
+
+.hide-mz-scroll {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.show-mz-scroll:hover {
+    scrollbar-width: thin;
+}
+
+
+.hide-scrollbar::-webkit-scrollbar {
+    display: none;
+}
+
+.show-scrollbar-on-hover:hover::-webkit-scrollbar {
+    display: block;
+    height: 4px;
+}
+
+.show-scrollbar-on-hover:hover::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.4);
+    border-radius: 4px;
+}

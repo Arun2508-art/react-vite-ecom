@@ -1,25 +1,63 @@
+import { useEffect } from 'react';
 import AnnouncementBanner from '../components/AnnouncementBanner';
+import Card from '../components/card';
 import CategoryCard from '../components/CategoryCard';
 import Container from '../components/Container';
 import FooterMessage from '../components/FooterMessage';
 import Silder from '../components/Silder';
+import { useAppDispatch, useAppSelector } from '../store/hooks';
+import { fetchProducts } from '../store/slice/product';
 
 const HomePage = () => {
+  const dispatch = useAppDispatch();
+  const { products } = useAppSelector((state) => state.product);
+
+  useEffect(() => {
+    dispatch(fetchProducts());
+  }, [dispatch]);
+
   return (
     <>
       <AnnouncementBanner />
       <Silder />
-
-      {/* <div className='mt-16 px-4 md:px-8 lg:px-16 xl:px-32 2xl:px-64'>
-        <h1 className='text-2xl'>Featured Products</h1>
-        <ProductList products={[]} />
-      </div> */}
-      <Container className='flex flex-wrap mt-8 gap-y-4'>
-        <CategoryCard label="Men's Fashion" imageName='items1.jpg' />
-        <CategoryCard label="Women's Fashion" imageName='items3.jpg' />
-        <CategoryCard label='Electronics' imageName='items2.jpg' />
-      </Container>
       <FooterMessage />
+      <Container className='flex flex-wrap mt-8 gap-y-4'>
+        <CategoryCard label="Men's Fashion" imageName='men.jpg' path='men' />
+        <CategoryCard
+          label="Women's Fashion"
+          imageName='women.jpg'
+          path='women'
+        />
+        <CategoryCard
+          label='Electronics'
+          imageName='electronics.jpg'
+          path='electronics'
+        />
+        <CategoryCard
+          label='Kitchen & Furniture'
+          imageName='kitchen.jpg'
+          path='others/all-household'
+        />
+        <CategoryCard
+          label='Motor'
+          imageName='motor.jpg'
+          path='others/all-motor'
+        />
+        <CategoryCard
+          label='Sports & Sun glasses'
+          imageName='sport.jpg'
+          path='others/all-sports'
+        />
+      </Container>
+
+      <Container className='mb-8'>
+        <h3 className='text-3xl font-semibold my-6 px-3'>Latest Products</h3>
+        <div className='flex md:flex-wrap overflow-x-auto hide-scrollbar show-scrollbar-on-hover hide-mz-scroll show-mz-scroll'>
+          {products.slice(0, 15).map((item) => (
+            <Card product={item} key={item.id} className='min--64' />
+          ))}
+        </div>
+      </Container>
     </>
   );
 };

@@ -8,7 +8,7 @@ const ProductImages = ({ images }: { images: string[] }) => {
       <div className='h-80'>
         <img src={images[index]} alt='' className='rounded-md h-full w-full' />
       </div>
-      <div className='flex gap-2 mt-2 justify-between'>
+      <div className='flex gap-2 mt-2'>
         {images.map((img, i) => (
           <div
             className='w-1/4 h-24 cursor-pointer hover:shadow-md hover:rounded-md'

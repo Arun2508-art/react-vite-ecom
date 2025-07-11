@@ -3,7 +3,7 @@ import Container from './Container';
 
 const Header = () => {
   return (
-    <Container className='flex justify-between items-center border-b border-gray-200 py-2'>
+    <Container className='hidden md:flex justify-between items-center border-b border-gray-200 py-2'>
       <div className='flex items-center gap-8'>
         <div className='font-light'>About Us</div>
         <div className='font-light'>Privacy</div>

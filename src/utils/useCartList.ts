@@ -18,6 +18,5 @@ export const useCartList = () => {
     }
   };
 
-  console.log(handleCart);
   return { handleCart };
 };
