@@ -50,16 +50,14 @@ const Card = ({ product, className }: CardProps) => {
           </div>
         </Link>
         <div className='pt-0 p-4 flex flex-col gap-2 border-t border-gray-300 group hover:bg-gray-100'>
-          <h1 className='line-clamp-2 h-16 overflow-hidden pt-4'>
-            {product.title}
-          </h1>
+          <h1 className='line-clamp-2 overflow-hidden pt-4'>{product.title}</h1>
           <div className='flex justify-between gap-4'>
             <StarRating rating={product.rating} />
             <Button variant='secondary'>
-              <IconHeart width={16} height={16} />
+              <IconHeart width={12} height={12} />
             </Button>
           </div>
-          <div className='flex justify-between items-baseline gap-4'>
+          <div className='flex justify-between items-end gap-4'>
             <div className='flex items-center gap-1'>
               <h3 className='text-xl font-medium'>${product.price}</h3>
               <h3 className='text-sm line-through text-gray-500 decoration-gray-800'>
@@ -78,7 +76,7 @@ const Card = ({ product, className }: CardProps) => {
                 }}
                 active={cartList.some((item) => item.id === product.id)}
               >
-                <IconGardenCart width={16} height={16} />
+                <IconGardenCart width={12} height={12} />
               </Button>
             </div>
           </div>

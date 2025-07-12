@@ -5,6 +5,7 @@ button {
 }
 
 @theme {
+    --breakpoint-sm: 28rem;
     --animate-fadeInDown: fadeInDown 0.4s ease-out forwards;
 
     @keyframes fadeInDown {
@@ -34,7 +35,7 @@ button {
     flex-shrink: 1;
     align-items: center;
     gap: 1rem;
-    padding-inline: 1rem 1.75rem;
+    padding-inline: 0.5rem 1rem;
     font-size: .875rem;
     display: inline-flex;
     position: relative

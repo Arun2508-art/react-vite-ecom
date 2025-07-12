@@ -47,7 +47,7 @@ const Silder = () => {
   //   });
 
   return (
-    <div className='h-[calc(100vh-161px)] relative overflow-hidden'>
+    <div className='h-60 sm:h-[calc(100vh-161px)] relative overflow-hidden'>
       <div className='w-max h-full flex transition-all ease-in-out duration-1000'>
         {slides.map((slide, index) => (
           <div
@@ -82,7 +82,6 @@ const Silder = () => {
                 src={slide.img}
                 alt={slide.title}
                 width='100%'
-                // height={300}
                 className='h-full'
               />
             </div>

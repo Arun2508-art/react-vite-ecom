@@ -39,11 +39,11 @@ const Navbar = () => {
     <div className='border-b border-gray-300 bg-white'>
       <Container
         className={`${
-          isSticky ? 'fixed top-0 left-0 w-full animate-fadeInDown' : ''
+          isSticky ? 'fixed top-0 left-0 right-0 w-full animate-fadeInDown' : ''
         } bg-white z-50 `}
       >
         <div className='flex items-center justify-between gap-8 h-full'>
-          <div className='flex items-center gap-12 focus-visible:outline-none'>
+          <div className='flex items-center gap-12 p-2 focus-visible:outline-none'>
             <Link
               to='/'
               className='flex items-center gap-3 focus-visible:outline-none'

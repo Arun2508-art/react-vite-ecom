@@ -21,10 +21,10 @@ const data = [
 
 const FooterMessage = () => {
   return (
-    <Container className='flex items-center gap-4 my-4 flex-wrap'>
+    <Container className='hidden sm:grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 my-4 '>
       {data.map((item) => (
         <div
-          className='flex items-center justify-center p-8 flex-1 bg-primary/10 rounded-md flex-col gap-2'
+          className='flex flex-col items-center justify-center text-center p-4 sm:p-8 rounded-md shadow-md border border-gray-200'
           key={item.label}
         >
           <div className='p-2 rounded-full bg-primary/10'>

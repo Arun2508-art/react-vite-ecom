@@ -21,9 +21,9 @@ const Button = ({
     'bg-black rounded-sm p-3 text-white': variant === 'primary',
     'ring-1 ring-black hover:bg-black hover:text-white rounded-sm p-3':
       variant === 'outline',
-    'bg-blue-500 text-white rounded-lg p-2 transition-all ease-in duration-300 md:invisible md:opacity-0 hover:bg-red-500 group-hover:visible group-hover:opacity-100':
+    'bg-blue-500 text-white rounded-lg p-2 transition-all ease-in duration-300 lg:invisible lg:opacity-0 hover:bg-red-500 group-hover:visible group-hover:opacity-100':
       variant === 'secondary' && !active,
-    'bg-red-500 text-white rounded-lg p-2 transition-all ease-in duration-300 md:invisible md:opacity-0 hover:bg-red-500 group-hover:visible group-hover:opacity-100':
+    'bg-red-500 text-white rounded-lg p-2 transition-all ease-in duration-300 lg:invisible lg:opacity-0 hover:bg-red-500 group-hover:visible group-hover:opacity-100':
       variant === 'secondary' && active
   });
   return (
