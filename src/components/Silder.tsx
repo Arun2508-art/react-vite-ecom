@@ -1,3 +1,4 @@
+import { IconChevronLeft, IconChevronRight } from '@tabler/icons-react';
 import { useState } from 'react';
 
 const slides = [
@@ -37,6 +38,7 @@ const slides = [
 
 const Silder = () => {
   const [current, setCurrent] = useState(0);
+  console.log(current, slides.length);
 
   //   useEffect(() => {
   //     const interval = setInterval(() => {
@@ -47,7 +49,7 @@ const Silder = () => {
   //   });
 
   return (
-    <div className='h-60 sm:h-[calc(100vh-161px)] relative overflow-hidden'>
+    <div className='h-60 sm:h-[calc(100vh-161px)] relative overflow-hidden group'>
       <div className='w-max h-full flex transition-all ease-in-out duration-1000'>
         {slides.map((slide, index) => (
           <div
@@ -58,16 +60,14 @@ const Silder = () => {
             {/* Text Container */}
             <div
               className={`hidden md:flex absolute ${
-                index % 2 === 0 ? 'right-14' : 'left-8'
+                index % 2 === 0 ? 'right-20' : 'left-20'
               } h-full text-center flex gap-4 flex-col justify-center`}
             >
               <h2 className='text-red-500 text-2xl tracking-wider'>
                 Fashion Sale
               </h2>
-              <h2 className='text-xl lg:text-3xl 2xl:text-5xl'>
-                {slide.description}
-              </h2>
-              <h1 className='text-5xl lg:text-6xl 2xl:text-8xl font-semibold'>
+              <h2 className='text-xl lg:text-3xl'>{slide.description}</h2>
+              <h1 className='text-3xl lg:text-4xl font-semibold'>
                 {slide.title}
               </h1>
               <a href={slide.url}>
@@ -88,7 +88,7 @@ const Silder = () => {
           </div>
         ))}
       </div>
-      <div className='absolute mt-auto left-1/2 bottom-4 flex gap-4'>
+      {/* <div className='absolute mt-auto left-1/2 bottom-4 flex gap-4'>
         {slides.map((slide, index) => (
           <div
             className={`w-2 h-2 rounded-full ring-1 ring-green-700 cursor-pointer flex items-center justify-center ${
@@ -102,6 +102,26 @@ const Silder = () => {
             )}
           </div>
         ))}
+      </div> */}
+      <div className='absolute left-5 bottom-1/2 hidden group-hover:block'>
+        {current !== 0 && (
+          <div
+            className='rounded-full shadow-md bg-white p-2 cursor-pointer flex items-center justify-center hover:text-red-500'
+            onClick={() => setCurrent((prev) => prev - 1)}
+          >
+            <IconChevronLeft width={30} height={30} />
+          </div>
+        )}
+      </div>
+      <div className='absolute right-5 bottom-1/2 hidden group-hover:block'>
+        {current !== slides.length - 1 && (
+          <div
+            className='rounded-full shadow-md bg-white p-2 cursor-pointer flex items-center justify-center hover:text-red-500'
+            onClick={() => setCurrent((prev) => prev + 1)}
+          >
+            <IconChevronRight width={30} height={30} />
+          </div>
+        )}
       </div>
     </div>
   );

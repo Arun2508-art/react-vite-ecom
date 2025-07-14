@@ -10,9 +10,9 @@ const Sidebar = () => {
   };
 
   return (
-    <>
+    <div className='block lg:hidden '>
       <div
-        className='block lg:hidden cursor-pointer p-2 hover:text-red-500'
+        className='cursor-pointer p-2 hover:text-red-500'
         onClick={() => setOpen((prev) => !prev)}
       >
         <IconMenu2 stroke={1} />
@@ -63,7 +63,7 @@ const Sidebar = () => {
           </Link>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

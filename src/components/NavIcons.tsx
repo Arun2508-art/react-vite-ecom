@@ -1,4 +1,4 @@
-import { IconGardenCart, IconUser } from '@tabler/icons-react';
+import { IconGardenCart, IconHeart } from '@tabler/icons-react';
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useAppSelector } from '../store/hooks';
@@ -32,6 +32,9 @@ const NavIcons = () => {
 
   return (
     <div className='flex gap-2 xl:gap-6 relative py-5'>
+      <Link to='/' className='cursor-pointer p-2 hover:text-red-500'>
+        <IconHeart stroke={1} />
+      </Link>
       <div
         className='relative cursor-pointer p-2 hover:text-red-500'
         onClick={handleCart}
@@ -45,9 +48,6 @@ const NavIcons = () => {
           </div>
         )}
       </div>
-      <Link to='auth' className='cursor-pointer p-2 hover:text-red-500'>
-        <IconUser stroke={1} />
-      </Link>
       {/* <div className='relative'>
         <div
           className='cursor-pointer p-2 hover:text-red-500'
