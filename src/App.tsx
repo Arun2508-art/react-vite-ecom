@@ -1,8 +1,5 @@
 import { Route, Routes } from 'react-router-dom';
-import AuthLayout from './layouts/AuthLayout';
 import MainLayout from './layouts/MainLayout';
-import Login from './pages/auth/Login';
-import Register from './pages/auth/Register';
 import Cart from './pages/Cart';
 import Checkout from './pages/Checkout';
 import Electronics from './pages/Electronics';
@@ -35,10 +32,6 @@ function App() {
           path='product/:categoryName/:productId'
           element={<ProductDetail />}
         />
-      </Route>
-      <Route path='auth' element={<AuthLayout />}>
-        <Route index element={<Login />} />
-        <Route path='register' element={<Register />} />
       </Route>
     </Routes>
   );
