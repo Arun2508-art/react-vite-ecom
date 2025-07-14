@@ -10,9 +10,11 @@ interface FilterButtonProps {
 
 const Filter = ({ category, onClick, onChange, active }: FilterButtonProps) => {
   return (
-    <div className='my-8 px-8 flex gap-4 justify-between'>
+    <div className='my-4 px-4 flex gap-4 justify-between'>
       <div>
-        <div className='text-xl font-semibold my-4'>Filters:</div>
+        <div className='hidden sm:block text-xl font-semibold my-4'>
+          Filters:
+        </div>
         <div className='flex gap-2 flex-wrap'>
           {category.map((item) => (
             <button
@@ -29,7 +31,9 @@ const Filter = ({ category, onClick, onChange, active }: FilterButtonProps) => {
       </div>
 
       <div className=''>
-        <div className='text-xl font-semibold my-4'>Sort by:</div>
+        <div className='hidden sm:block text-xl font-semibold my-4'>
+          Sort by:
+        </div>
         <select
           name='sort'
           id=''

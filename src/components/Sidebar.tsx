@@ -15,7 +15,7 @@ const Sidebar = () => {
         className='block lg:hidden cursor-pointer p-2 hover:text-red-500'
         onClick={() => setOpen((prev) => !prev)}
       >
-        {open ? <IconX stroke={1} /> : <IconMenu2 stroke={1} />}
+        <IconMenu2 stroke={1} />
       </div>
       {/* Left Sidebar (Slide In/Out) */}
       <div
@@ -26,20 +26,20 @@ const Sidebar = () => {
 
       {/* Right Sidebar (Static) */}
       <div
-        className={`fixed top-0 right-0 h-screen w-full sm:w-[400px] z-50 p-4 bg-white transition-all ease-linear duration-300 ${
+        className={`fixed top-0 right-0 h-screen w-full sm:w-[400px] z-50 bg-white transition-all ease-linear duration-300 ${
           open ? 'translate-x-0' : 'translate-x-full'
         }`}
       >
-        <div className='flex items-center justify-between gap-3'>
+        <div className='flex items-center justify-between gap-3 p-4 border-b border-gray-200'>
           <img src='/loder.webp' alt='logo' width={45} height={45} />
           <button
             className='rounded-md hover:bg-red-500 p-2 hover:text-white cursor-pointer'
             onClick={handleClose}
           >
-            <IconX width={16} height={16} stroke={1.5} />
+            <IconX width={24} height={24} stroke={1.5} />
           </button>
         </div>
-        <div className='flex flex-col gap-4 mt-8 font-semibold'>
+        <div className='flex flex-col gap-4 mt-6 pb-4 font-semibold px-4'>
           <Link onClick={handleClose} to='/men'>
             Men
           </Link>

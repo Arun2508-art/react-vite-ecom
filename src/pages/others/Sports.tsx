@@ -51,8 +51,12 @@ const Sports = () => {
 
   return (
     <Container className='mb-10'>
-      <div className='my-8'>
-        <h1 className='font-semibold text-3xl'>Sports & Sun glasses</h1>
+      <div className='py-4 h-80 rounded-md'>
+        <img
+          src='/images/banner/sport_banner.jpg'
+          alt=''
+          className='h-full w-full rounded-md'
+        />
       </div>
       <Filter
         category={FilterSportCategories}

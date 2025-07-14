@@ -48,8 +48,12 @@ const WomenHomepage = () => {
 
   return (
     <Container className='mb-10'>
-      <div className='my-8'>
-        <h1 className='font-semibold text-3xl'>Women's Clothing</h1>
+      <div className='py-4 h-80 rounded-md'>
+        <img
+          src='/images/banner/men_banner.jpg'
+          alt=''
+          className='h-full w-full rounded-md'
+        />
       </div>
       <Filter
         category={FilterWomensCategories}
