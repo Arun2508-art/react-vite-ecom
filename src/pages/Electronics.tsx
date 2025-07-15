@@ -48,9 +48,9 @@ const Electronics = () => {
 
   return (
     <Container className='mb-10'>
-      <div className='py-4 h-80 rounded-md'>
+      <div className='pb-4 h-80 rounded-md'>
         <img
-          src='/images/banner/men_banner.jpg'
+          src='/images/category/electronics.jpg'
           alt=''
           className='h-full w-full rounded-md'
         />
@@ -65,7 +65,7 @@ const Electronics = () => {
       {isLoading ? (
         <Loading />
       ) : (
-        <div className='flex flex-wrap gap-y-8'>
+        <div className='flex flex-wrap'>
           {item.length > 0 ? (
             item
               .filter((product) =>

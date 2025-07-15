@@ -8,6 +8,8 @@ export interface CartListProps {
   category: string;
   thumbnail: string;
   rating: number;
+  stock: number;
+  quantity: number;
 }
 interface CartProps {
   cartList: CartListProps[];
@@ -21,8 +23,11 @@ export const cart = createSlice({
   name: 'cart',
   initialState,
   reducers: {
-    addToCart: (state, { payload }: PayloadAction<CartListProps>) => {
-      state.cartList.push(payload);
+    addToCart: (
+      state,
+      { payload }: PayloadAction<Omit<CartListProps, 'quantity'>>
+    ) => {
+      state.cartList.push({ ...payload, quantity: 1 });
     },
     removeFromCart: (
       state,
@@ -33,9 +38,18 @@ export const cart = createSlice({
       state.cartList = state.cartList.filter(
         (item) => item.id !== id || item.category !== category
       );
+    },
+    updateQuantity: (
+      state,
+      { payload }: PayloadAction<{ id: number; quantity: number }>
+    ) => {
+      const item = state.cartList.find((i) => i.id === payload.id);
+      if (item) {
+        item.quantity = payload.quantity;
+      }
     }
   }
 });
 
-export const { addToCart, removeFromCart } = cart.actions;
+export const { addToCart, removeFromCart, updateQuantity } = cart.actions;
 export default cart.reducer;

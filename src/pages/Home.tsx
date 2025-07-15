@@ -51,10 +51,12 @@ const HomePage = () => {
       </Container>
 
       <Container className='mb-8'>
-        <h3 className='text-3xl font-semibold my-6 px-3'>Latest Products</h3>
+        <h3 className='text-3xl font-semibold mt-6 mb-3 px-3'>
+          Latest Products
+        </h3>
         <div className='flex md:flex-wrap overflow-x-auto hide-scrollbar show-scrollbar-on-hover hide-mz-scroll show-mz-scroll'>
           {products.slice(0, 15).map((item) => (
-            <Card product={item} key={item.id} className='min--64' />
+            <Card product={item} key={item.id} />
           ))}
         </div>
       </Container>

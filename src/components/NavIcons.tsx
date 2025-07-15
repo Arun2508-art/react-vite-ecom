@@ -5,7 +5,7 @@ import { useAppSelector } from '../store/hooks';
 import CartModal from './CartModal';
 import Sidebar from './Sidebar';
 
-const NavIcons = () => {
+const NavIcons = ({ active }: { active: boolean }) => {
   // const [isProfileOpen, setIsProfileOpen] = useState(false);
   const [isCartOpen, setIsCartOpen] = useState(false);
   const { cartList } = useAppSelector((state) => state.cart);
@@ -31,7 +31,7 @@ const NavIcons = () => {
   }, [isCartOpen]);
 
   return (
-    <div className='flex gap-2 xl:gap-6 relative py-5'>
+    <div className={`flex gap-2 xl:gap-6 relative ${active ? 'py-1' : 'py-5'}`}>
       <Link to='/' className='cursor-pointer p-2 hover:text-red-500'>
         <IconHeart stroke={1} />
       </Link>

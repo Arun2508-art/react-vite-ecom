@@ -1,5 +1,6 @@
 import { Route, Routes } from 'react-router-dom';
 import MainLayout from './layouts/MainLayout';
+import ProductLayout from './layouts/ProductLayout';
 import Cart from './pages/Cart';
 import Checkout from './pages/Checkout';
 import Electronics from './pages/Electronics';
@@ -28,6 +29,8 @@ function App() {
           <Route path='all-lifestyle' element={<Lifestyle />} />
           <Route path='all-motor' element={<Motor />} />
         </Route>
+      </Route>
+      <Route element={<ProductLayout />}>
         <Route
           path='product/:categoryName/:productId'
           element={<ProductDetail />}

@@ -1,5 +1,6 @@
 import { IconGardenCart, IconHeart } from '@tabler/icons-react';
 import classNames from 'classnames';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../store/hooks';
 import { addToCart, removeFromCart } from '../store/slice/cart';
@@ -16,6 +17,7 @@ interface CardProps {
 const Card = ({ product, className }: CardProps) => {
   const dispatch = useAppDispatch();
   const { cartList } = useAppSelector((state) => state.cart);
+  const [showTooltip, setShowTooltip] = useState(false);
 
   const handleCart = (item: ProductListProps) => {
     const exists = cartList.some(
@@ -50,7 +52,20 @@ const Card = ({ product, className }: CardProps) => {
           </div>
         </Link>
         <div className='pt-0 p-4 flex flex-col gap-2 border-t border-gray-300 group hover:bg-gray-100'>
-          <h1 className='line-clamp-2 overflow-hidden pt-4'>{product.title}</h1>
+          <div className='relative inline-block pt-4 max-w-xs'>
+            <h1
+              className='max-h-14 line-clamp-1 overflow-hidden cursor-pointer'
+              onMouseEnter={() => setShowTooltip(true)}
+              onMouseLeave={() => setShowTooltip(false)}
+            >
+              {product.title}
+            </h1>
+            {showTooltip && (
+              <div className='absolute z-10 bg-gray-800 text-white text-xs rounded px-2 py-1 mt-1 whitespace-normal max-w-xs'>
+                {product.title}
+              </div>
+            )}
+          </div>
           <div className='flex justify-between gap-4'>
             <StarRating rating={product.rating} />
             <Button variant='secondary'>

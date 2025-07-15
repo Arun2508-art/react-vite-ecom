@@ -51,7 +51,7 @@ const Sports = () => {
 
   return (
     <Container className='mb-10'>
-      <div className='py-4 h-80 rounded-md'>
+      <div className='pb-4 h-80 rounded-md'>
         <img
           src='/images/banner/sport_banner.jpg'
           alt=''
@@ -67,7 +67,7 @@ const Sports = () => {
       {isLoading ? (
         <Loading />
       ) : (
-        <div className='flex flex-wrap gap-y-8'>
+        <div className='flex flex-wrap'>
           {item.length > 0 ? (
             item
               .filter((product) =>

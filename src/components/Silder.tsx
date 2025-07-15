@@ -38,7 +38,6 @@ const slides = [
 
 const Silder = () => {
   const [current, setCurrent] = useState(0);
-  console.log(current, slides.length);
 
   //   useEffect(() => {
   //     const interval = setInterval(() => {

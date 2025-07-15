@@ -51,9 +51,9 @@ const Men = () => {
       {/* <div className='mt-8'>
         <h1 className='font-semibold text-3xl'>Men's Clothing</h1>
       </div> */}
-      <div className='py-4 h-80 rounded-md'>
+      <div className='pb-4 h-80 rounded-md'>
         <img
-          src='/images/banner/men_banner.jpg'
+          src='/images/banner/h1_hero1.jpg'
           alt=''
           className='h-full w-full rounded-md'
         />
@@ -67,7 +67,7 @@ const Men = () => {
       {isLoading ? (
         <Loading />
       ) : (
-        <div className='flex flex-wrap gap-y-2 md:gap-y-8'>
+        <div className='flex flex-wrap'>
           {item.length > 0 ? (
             item
               .filter((product) =>

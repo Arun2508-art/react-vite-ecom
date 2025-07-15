@@ -39,20 +39,24 @@ const Navbar = () => {
     <div className='border-b border-gray-300 bg-white'>
       <Container
         className={`${
-          isSticky ? 'fixed top-0 left-0 right-0 w-full animate-fadeInDown' : ''
+          isSticky
+            ? 'fixed top-0 left-0 right-0 w-full animate-fadeInDown shadow-xl'
+            : ''
         } bg-white z-50 `}
       >
         <div className='flex items-center justify-between gap-8 h-full'>
           <div className='flex items-center gap-12 p-2 focus-visible:outline-none'>
-            <Link
-              to='/'
-              className='flex items-center gap-3 focus-visible:outline-none'
-            >
-              <img src='/loder.webp' alt='logo' width={45} height={45} />
-              <div className='text-2xl tracking-wide uppercase font-semibold'>
-                Mathi
-              </div>
-            </Link>
+            {!isSticky && (
+              <Link
+                to='/'
+                className='flex items-center gap-3 focus-visible:outline-none'
+              >
+                <img src='/loder.webp' alt='logo' width={45} height={45} />
+                <div className='text-2xl tracking-wide uppercase font-semibold'>
+                  Mathi
+                </div>
+              </Link>
+            )}
           </div>
 
           <ul className='hidden lg:flex items-center gap-4 px-4'>
@@ -63,7 +67,9 @@ const Navbar = () => {
                 return (
                   <li key={item.name} className='relative group'>
                     <div
-                      className={`px-3 py-7 font-semibold flex items-center gap-1 cursor-pointer hover:text-red-500 ${
+                      className={`${
+                        isSticky ? 'py-3' : 'py-7'
+                      } px-3 font-semibold flex items-center gap-1 cursor-pointer hover:text-red-500 ${
                         isActiveSubmenu
                           ? 'text-red-500 border-b-2 border-red-500'
                           : ''
@@ -98,7 +104,9 @@ const Navbar = () => {
                     <NavLink
                       to={item.href || ''}
                       className={({ isActive }) =>
-                        `px-3 py-7 font-semibold hover:text-red-500 transition-colors ${
+                        `${
+                          isSticky ? 'py-3' : 'py-7'
+                        } px-3 font-semibold hover:text-red-500 transition-colors ${
                           isActive
                             ? 'text-red-500 border-b-2 border-red-500'
                             : ''
@@ -115,7 +123,7 @@ const Navbar = () => {
 
           <div className='flex items-center justify-between gap-8 text-primary'>
             {/* <SearchBar /> */}
-            <NavIcons />
+            <NavIcons active={isSticky} />
           </div>
         </div>
       </Container>
