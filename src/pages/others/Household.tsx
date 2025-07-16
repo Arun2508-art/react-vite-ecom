@@ -12,6 +12,7 @@ import {
   allowedHouseholdCategories,
   FilterHouseholdCategories
 } from '../../utils/categories';
+import { handleSort, type SortOption } from '../../utils/helper';
 
 const Household = () => {
   const [item, setItem] = useState<ProductListProps[]>([]);
@@ -37,16 +38,9 @@ const Household = () => {
     }
   };
 
-  const handleFilterChange = (value: string) => {
-    let sortedItems = [...item];
-    if (value === 'ascprice') {
-      sortedItems.sort((a, b) => a.price - b.price);
-    } else if (value === 'descprice') {
-      sortedItems.sort((a, b) => b.price - a.price);
-    } else {
-      sortedItems = [...products];
-    }
-    setItem(sortedItems);
+  const handleSortChange = (option: SortOption) => {
+    const sorted = handleSort(option, item, products);
+    setItem(sorted);
   };
 
   return (
@@ -60,7 +54,7 @@ const Household = () => {
       </div>
       <Filter
         category={FilterHouseholdCategories}
-        onChange={handleFilterChange}
+        onChange={handleSortChange}
         onClick={handleFilter}
         active={selectOption}
       />

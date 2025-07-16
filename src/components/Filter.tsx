@@ -1,10 +1,12 @@
+import type { SortOption } from '../utils/helper';
+
 interface FilterButtonProps {
   category: {
     label: string;
     value: string;
   }[];
   onClick: (value: string) => void;
-  onChange: (value: string) => void;
+  onChange: (value: SortOption) => void;
   active?: string;
 }
 
@@ -38,7 +40,7 @@ const Filter = ({ category, onClick, onChange, active }: FilterButtonProps) => {
           name='sort'
           id=''
           className='select py-1 px-2 rounded-md text-sm font-medium bg-white ring-1 ring-gray-600 focus:outline-lime-700'
-          onChange={(e) => onChange(e.target.value)}
+          onChange={(e) => onChange(e.target.value as SortOption)}
         >
           <option value='normal'>Normal</option>
           <option value='ascprice'>Price (low to high)</option>

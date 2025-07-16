@@ -9,9 +9,10 @@ import {
   allowedMensCategories,
   FilterMensCategories
 } from '../utils/categories';
+import { handleSort, type SortOption } from '../utils/helper';
 
 const Men = () => {
-  const [item, setItem] = useState<ProductListProps[]>([]);
+  const [items, setItems] = useState<ProductListProps[]>([]);
   const [selectOption, setSelectedOption] = useState<string>('');
   const dispatch = useAppDispatch();
   const { products, isLoading } = useAppSelector((state) => state.product);
@@ -21,29 +22,22 @@ const Men = () => {
   }, [dispatch]);
 
   useEffect(() => {
-    setItem(products);
+    setItems(products);
   }, [products]);
 
   const handleFilter = (value: string) => {
     if (selectOption === value) {
       setSelectedOption('');
-      setItem(products);
+      setItems(products);
     } else {
       setSelectedOption(value);
-      setItem(products.filter((item) => item.category === value));
+      setItems(products.filter((item) => item.category === value));
     }
   };
 
-  const handleFilterChange = (value: string) => {
-    let sortedItems = [...item];
-    if (value === 'ascprice') {
-      sortedItems.sort((a, b) => a.price - b.price);
-    } else if (value === 'descprice') {
-      sortedItems.sort((a, b) => b.price - a.price);
-    } else {
-      sortedItems = [...products];
-    }
-    setItem(sortedItems);
+  const handleSortChange = (option: SortOption) => {
+    const sorted = handleSort(option, items, products);
+    setItems(sorted);
   };
 
   return (
@@ -61,15 +55,15 @@ const Men = () => {
       <Filter
         category={FilterMensCategories}
         onClick={handleFilter}
-        onChange={handleFilterChange}
+        onChange={handleSortChange}
         active={selectOption}
       />
       {isLoading ? (
         <Loading />
       ) : (
         <div className='flex flex-wrap'>
-          {item.length > 0 ? (
-            item
+          {items.length > 0 ? (
+            items
               .filter((product) =>
                 allowedMensCategories.includes(product.category)
               )
