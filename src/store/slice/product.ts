@@ -1,18 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
-// export interface ProductListProps {
-//   id: number;
-//   title: string;
-//   price: number;
-//   description: string;
-//   category: string;
-//   image: string;
-//   rating: {
-//     count: number;
-//     rate: number;
-//   };
-// }
-
 export interface ProductListProps {
   id: number;
   title: string;

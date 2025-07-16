@@ -86,7 +86,7 @@ const Cart = () => {
                       <div className='flex items-center justify-between gap-8'>
                         <div className='bg-gray-200 py-1 px-3 rounded-md flex items-center justify-between w-32'>
                           <button
-                            className='cursor-pointer text-xl text-red-500 disabled:cursor-not-allowed disabled:opacity-20'
+                            className='cursor-pointer text-xl text-blue-500 disabled:cursor-not-allowed disabled:opacity-20'
                             onClick={() => handleQuantity(item.id, 'd')}
                             disabled={quantity[item.id] === 1}
                           >
@@ -94,7 +94,7 @@ const Cart = () => {
                           </button>
                           {quantity[item.id]}
                           <button
-                            className='cursor-pointer text-xl text-red-500 disabled:cursor-not-allowed disabled:opacity-20'
+                            className='cursor-pointer text-xl text-blue-500 disabled:cursor-not-allowed disabled:opacity-20'
                             onClick={() => handleQuantity(item.id, 'i')}
                             disabled={quantity[item.id] === item.stock}
                           >

@@ -1,18 +1,18 @@
-import { IconGardenCart, IconHeart } from '@tabler/icons-react';
+import { IconGardenCart, IconUserCircle } from '@tabler/icons-react';
 import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
 import { useAppSelector } from '../store/hooks';
 import CartModal from './CartModal';
 import Sidebar from './Sidebar';
 
 const NavIcons = ({ active }: { active: boolean }) => {
-  // const [isProfileOpen, setIsProfileOpen] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
   const [isCartOpen, setIsCartOpen] = useState(false);
   const { cartList } = useAppSelector((state) => state.cart);
 
-  // const handleProfile = () => {
-  //   setIsProfileOpen((prev) => !prev);
-  // };
+  const handleProfile = () => {
+    setIsLoggedIn((prev) => !prev);
+  };
 
   const handleCart = () => {
     setIsCartOpen((prev) => !prev);
@@ -32,9 +32,6 @@ const NavIcons = ({ active }: { active: boolean }) => {
 
   return (
     <div className={`flex gap-2 xl:gap-6 relative ${active ? 'py-1' : 'py-5'}`}>
-      <Link to='/' className='cursor-pointer p-2 hover:text-red-500'>
-        <IconHeart stroke={1} />
-      </Link>
       <div
         className='relative cursor-pointer p-2 hover:text-red-500'
         onClick={handleCart}
@@ -48,20 +45,19 @@ const NavIcons = ({ active }: { active: boolean }) => {
           </div>
         )}
       </div>
-      {/* <div className='relative'>
+      <div className='relative'>
         <div
           className='cursor-pointer p-2 hover:text-red-500'
           onClick={handleProfile}
         >
           <IconUserCircle stroke={1} />
         </div>
-        {isProfileOpen && (
-          <div className='absolute p-4 rounded-md top-12 right-0 bg-white z-20 shadow-[0_3px_10px_rgb(0,0,0,0.2)]'>
-            <Link to='/'>Profile</Link>
-            <div className='mt-2 cursor-pointer'>Logout</div>
+        {isLoggedIn && (
+          <div className='absolute p-4 border-t border-red-500 rounded-md top-12 right-0 bg-white z-20 shadow-[0_3px_10px_rgb(0,0,0,0.2)]'>
+            <div className='whitespace-nowrap px-3 pb-2'>Arun Kumar</div>
           </div>
         )}
-      </div> */}
+      </div>
       <Sidebar />
       {isCartOpen && <CartModal hide={setIsCartOpen} />}
     </div>

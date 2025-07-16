@@ -11,7 +11,7 @@ import Lifestyle from './pages/others/Lifestyle';
 import Motor from './pages/others/Motor';
 import Sports from './pages/others/Sports';
 import ProductDetail from './pages/ProductDetail';
-import WomenHomepage from './pages/WomenHomepage';
+import Women from './pages/Women';
 
 function App() {
   return (
@@ -19,7 +19,7 @@ function App() {
       <Route element={<MainLayout />}>
         <Route index element={<HomePage />} />
         <Route path='men' element={<Men />} />
-        <Route path='women' element={<WomenHomepage />} />
+        <Route path='women' element={<Women />} />
         <Route path='electronics' element={<Electronics />} />
         <Route path='cart' element={<Cart />} />
         <Route path='checkout' element={<Checkout />} />

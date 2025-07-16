@@ -6,7 +6,7 @@ const Footer = () => {
     <div className='bg-black text-white text-sm py-8'>
       <Container>
         {/* TOP */}
-        <div className='flex flex-col md:flex-row justify-between gap-24'>
+        <div className='flex flex-col md:flex-row justify-between gap-4 md:gap-24'>
           {/* LEFT */}
           <div className='w-full md:w-1/2 lg:w-1/4 flex flex-col gap-8'>
             <Link to='/' className='flex gap-4 items-center'>
@@ -76,7 +76,7 @@ const Footer = () => {
               <button className='w-1/4 bg-fram text-white'>JOIN</button>
             </div>
             <span className='font-semibold'>Secure Payments</span>
-            <div className='flex justify-between'>
+            <div className='flex justify-between bg-gray-300 md:bg-transparent p-2 rounded-sm'>
               <img src='/discover.png' alt='' width={40} height={20} />
               <img src='/skrill.png' alt='' width={40} height={20} />
               <img src='/paypal.png' alt='' width={40} height={20} />

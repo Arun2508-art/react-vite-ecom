@@ -77,7 +77,12 @@ const Navbar = () => {
                     >
                       <span>{item.name}</span>
                       <span className='mt-1'>
-                        <IconChevronDown width={14} height={14} stroke={3} />
+                        <IconChevronDown
+                          width={14}
+                          height={14}
+                          stroke={3}
+                          className='group-hover:rotate-180 transition-all ease-in-out duration-300'
+                        />
                       </span>
                     </div>
                     <ul className='shadow-md opacity-0 invisible mt-0.5 group-hover:visible group-hover:opacity-100 group-hover:top-full absolute top-1/2 w-45 bg-white p-4 z-50 rounded-md border-t-2 border-red-500 transition-all ease-out duration-300'>

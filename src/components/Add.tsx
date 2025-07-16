@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useAppSelector } from '../store/hooks';
 import type { ProductListProps } from '../store/slice/product';
 import { useCartList } from '../utils/useCartList';
@@ -8,8 +8,7 @@ const Add = ({ product }: { product: ProductListProps | null }) => {
   const { handleCart } = useCartList();
   const { cartList } = useAppSelector((state) => state.cart);
 
-  // TEMPORARY
-  const stock = product?.stock || 4;
+  const stock = product?.stock ?? 4;
 
   const handleQuantity = (type: 'i' | 'd') => {
     if (type === 'd' && quantity > 1) {
@@ -20,24 +19,36 @@ const Add = ({ product }: { product: ProductListProps | null }) => {
     }
   };
 
+  useEffect(() => {
+    if (!product) return;
+
+    const existingItem = cartList.find((item) => item.id === product.id);
+
+    if (existingItem) {
+      setQuantity(existingItem.quantity);
+    } else {
+      setQuantity(1);
+    }
+  }, [product, cartList]);
+
   return (
-    <div className='flex flex-col gap-3'>
+    <div className='flex flex-col gap-3 mb-3'>
       <h4 className='font-medium text-xl'>Choose a Quantity</h4>
       <div className='flex justify-between'>
         <div className='flex items-center gap-4'>
-          <div className='bg-gray-100 py-2 px-4 rounded-3xl flex items-center justify-between w-32'>
+          <div className='bg-gray-100 py-1 px-4 rounded-md border border-gray-200 flex items-center justify-between w-32'>
             <button
-              className='cursor-pointer text-xl text-red-500 disabled:cursor-not-allowed disabled:opacity-20'
+              className='cursor-pointer text-xl text-blue-500 disabled:cursor-not-allowed disabled:opacity-20'
               onClick={() => handleQuantity('d')}
               disabled={quantity === 1}
             >
               -
             </button>
-            {quantity}
+            <span className='px-3 py-1 bg-white rounded-md'>{quantity}</span>
             <button
-              className='cursor-pointer text-xl text-red-500 disabled:cursor-not-allowed disabled:opacity-20'
+              className='cursor-pointer text-xl text-blue-500 disabled:cursor-not-allowed disabled:opacity-20'
               onClick={() => handleQuantity('i')}
-              //  disabled={quantity === stockNumber}
+              disabled={quantity === stock}
             >
               +
             </button>
@@ -46,7 +57,8 @@ const Add = ({ product }: { product: ProductListProps | null }) => {
             <div className='text-xs'>Product is out of stock</div>
           ) : (
             <div className='text-xs'>
-              Only <span className='text-red-500 font-bold'>{stock} items</span>{' '}
+              Only{' '}
+              <span className='text-blue-500 font-bold'>{stock} items</span>{' '}
               left!
               {stock <= 5 && (
                 <>
@@ -57,14 +69,16 @@ const Add = ({ product }: { product: ProductListProps | null }) => {
           )}
         </div>
         <button
-          className={`rounded-sm p-3 text-white hover:bg-red-500 hover:text-white disabled:cursor-not-allowed disabled:bg-pink-200 disabled:ring-0 disabled:text-white disabled:ring-none ${
+          className={`rounded-md px-4 py-2 text-white ${
             cartList.some((item) => item.id === product?.id)
-              ? 'bg-red-500'
-              : 'bg-black'
+              ? 'bg-red-500 hover:bg-red-700'
+              : 'bg-black hover:bg-gray-700 '
           }`}
-          onClick={() => product && handleCart(product)}
+          onClick={() => product && handleCart(product, quantity)}
         >
-          Add to Cart
+          {cartList.find((item) => item.id === product?.id)
+            ? 'Remove from Cart'
+            : 'Add to Cart'}
         </button>
       </div>
     </div>

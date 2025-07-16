@@ -1,5 +1,5 @@
 import { IconChevronLeft, IconChevronRight } from '@tabler/icons-react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 const slides = [
   {
@@ -28,31 +28,31 @@ const slides = [
   },
   {
     id: 4,
-    title: 'Spring Sale Collections',
-    description: 'Sale! Up to 50% off!',
-    img: '/images/banner/h1_hero1.jpg',
-    url: '/',
-    bg: 'bg-gradient-to-r from-blue-50 to-yellow-50'
+    title: 'Gaming Monitor 144Hz',
+    description: 'Ultra-smooth gaming with crisp visuals.',
+    img: '/images/banner/banner.jpg',
+    url: '/products/56',
+    bg: 'bg-gradient-to-r from-gray-200 to-black'
   }
 ];
 
 const Silder = () => {
   const [current, setCurrent] = useState(0);
 
-  //   useEffect(() => {
-  //     const interval = setInterval(() => {
-  //       setCurrent((prev) => (prev === slides.length - 1 ? 0 : prev + 1));
-  //     }, 3000);
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrent((prev) => (prev === slides.length - 1 ? 0 : prev + 1));
+    }, 5000);
 
-  //     return () => clearInterval(interval);
-  //   });
+    return () => clearInterval(interval);
+  });
 
   return (
     <div className='h-60 sm:h-[calc(100vh-161px)] relative overflow-hidden group'>
-      <div className='w-max h-full flex transition-all ease-in-out duration-1000'>
+      <div className='w-max h-full flex'>
         {slides.map((slide, index) => (
           <div
-            className={`${slide.bg} w-screen h-full flex flex-col gap-16 md:flex-row`}
+            className={`${slide.bg} transition-all ease-in-out duration-1000 w-screen h-full flex flex-col gap-16 md:flex-row`}
             style={{ transform: `translateX(-${current * 100}vw)` }}
             key={slide.id}
           >

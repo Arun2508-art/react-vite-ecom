@@ -13,7 +13,6 @@ interface CardModalProps {
 const CartModal = ({ hide }: CardModalProps) => {
   const dispatch = useAppDispatch();
   const { cartList } = useAppSelector((state) => state.cart);
-  // const [quantity, setQuantity] = useState<{ [id: number]: number }>({});
   const navigate = useNavigate();
 
   const handleClose = () => {
@@ -31,14 +30,6 @@ const CartModal = ({ hide }: CardModalProps) => {
   };
 
   const handleQuantity = (id: number, type: 'i' | 'd') => {
-    // setQuantity((prev) => {
-    //   if (type === 'd' && prev[id] > 1) {
-    //     return { ...prev, [id]: prev[id] - 1 };
-    //   } else if (type === 'i') {
-    //     return { ...prev, [id]: prev[id] + 1 };
-    //   }
-    //   return prev;
-    // });
     const item = cartList.find((i) => i.id === id);
     if (!item) return;
 
@@ -58,14 +49,6 @@ const CartModal = ({ hide }: CardModalProps) => {
       return sum + item.price * item.quantity;
     }, 0);
   }, [cartList]);
-
-  // useEffect(() => {
-  //   const initialQuantities = cartList.reduce((acc, item) => {
-  //     acc[item.id] = 1;
-  //     return acc;
-  //   }, {} as { [id: number]: number });
-  //   setQuantity(initialQuantities);
-  // }, [cartList]);
 
   return (
     <div className='absolute top-12 right-0 p-4 rounded-md shadow-[0_3px_20px_rgb(0,0,0,0.2)] z-20 flex flex-col gap-6 bg-white'>
@@ -117,18 +100,17 @@ const CartModal = ({ hide }: CardModalProps) => {
                   <div className='flex items-center justify-between gap-8'>
                     <div className='bg-gray-100 border border-gray-200 px-2 rounded-md flex items-center justify-between'>
                       <button
-                        className='cursor-pointer pr-2 text-xl text-red-500 disabled:cursor-not-allowed disabled:opacity-20'
+                        className='cursor-pointer pr-2 text-xl text-blue-500 disabled:cursor-not-allowed disabled:opacity-20'
                         onClick={() => handleQuantity(item.id, 'd')}
                         disabled={item.quantity === 1}
                       >
                         -
                       </button>
-
                       <span className='px-2 bg-white rounded-md'>
                         {item.quantity}
                       </span>
                       <button
-                        className='cursor-pointer pl-2 text-xl text-red-500 disabled:cursor-not-allowed disabled:opacity-20'
+                        className='cursor-pointer pl-2 text-xl text-blue-500 disabled:cursor-not-allowed disabled:opacity-20'
                         onClick={() => handleQuantity(item.id, 'i')}
                         disabled={item.quantity === item.stock}
                       >

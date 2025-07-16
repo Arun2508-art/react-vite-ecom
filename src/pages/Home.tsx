@@ -21,33 +21,36 @@ const HomePage = () => {
       <AnnouncementBanner />
       <Silder />
       <FooterMessage />
-      <Container className='flex flex-wrap mt-8 gap-y-4'>
-        <CategoryCard label="Men's Fashion" imageName='men.jpg' path='men' />
-        <CategoryCard
-          label="Women's Fashion"
-          imageName='women.jpg'
-          path='women'
-        />
-        <CategoryCard
-          label='Electronics'
-          imageName='electronics.jpg'
-          path='electronics'
-        />
-        <CategoryCard
-          label='Kitchen & Furniture'
-          imageName='kitchen.jpg'
-          path='others/all-household'
-        />
-        <CategoryCard
-          label='Motor'
-          imageName='motor.jpg'
-          path='others/all-motor'
-        />
-        <CategoryCard
-          label='Sports & Sun glasses'
-          imageName='sport.jpg'
-          path='others/all-sports'
-        />
+      <Container className='mt-8'>
+        <h3 className='text-3xl font-semibold my-6 px-3'>Categories</h3>
+        <div className='flex flex-wrap gap-y-4'>
+          <CategoryCard label="Men's Fashion" imageName='men.jpg' path='men' />
+          <CategoryCard
+            label="Women's Fashion"
+            imageName='women.jpg'
+            path='women'
+          />
+          <CategoryCard
+            label='Electronics'
+            imageName='electronics.jpg'
+            path='electronics'
+          />
+          <CategoryCard
+            label='Kitchen & Furniture'
+            imageName='kitchen.jpg'
+            path='others/all-household'
+          />
+          <CategoryCard
+            label='Motor'
+            imageName='motor.jpg'
+            path='others/all-motor'
+          />
+          <CategoryCard
+            label='Sports & Sun glasses'
+            imageName='sport.jpg'
+            path='others/all-sports'
+          />
+        </div>
       </Container>
 
       <Container className='mb-8'>

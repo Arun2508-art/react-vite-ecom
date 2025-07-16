@@ -1,11 +1,11 @@
-import { IconGardenCart, IconHeart } from '@tabler/icons-react';
+import { IconGardenCart } from '@tabler/icons-react';
 import classNames from 'classnames';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { useAppDispatch, useAppSelector } from '../store/hooks';
-import { addToCart, removeFromCart } from '../store/slice/cart';
+import { useAppSelector } from '../store/hooks';
 import type { ProductListProps } from '../store/slice/product';
 import { getOriginalPrice } from '../utils/helper';
+import { useCartList } from '../utils/useCartList';
 import Button from './Button';
 import StarRating from './StarRating';
 
@@ -15,21 +15,9 @@ interface CardProps {
 }
 
 const Card = ({ product, className }: CardProps) => {
-  const dispatch = useAppDispatch();
   const { cartList } = useAppSelector((state) => state.cart);
   const [showTooltip, setShowTooltip] = useState(false);
-
-  const handleCart = (item: ProductListProps) => {
-    const exists = cartList.some(
-      (val) => val.id === item.id && val.category === item.category
-    );
-
-    if (exists) {
-      dispatch(removeFromCart({ id: item.id, category: item.category }));
-    } else {
-      dispatch(addToCart(item));
-    }
-  };
+  const { handleCart } = useCartList();
 
   const CardContainerClasses = classNames(
     'w-full sm:w-1/2 md:w-1/3 lg:w-1/4',
@@ -68,9 +56,9 @@ const Card = ({ product, className }: CardProps) => {
           </div>
           <div className='flex justify-between gap-4'>
             <StarRating rating={product.rating} />
-            <Button variant='secondary'>
+            {/* <Button variant='secondary'>
               <IconHeart width={12} height={12} />
-            </Button>
+            </Button> */}
           </div>
           <div className='flex justify-between items-end gap-4'>
             <div className='flex items-center gap-1'>
@@ -87,7 +75,7 @@ const Card = ({ product, className }: CardProps) => {
               <Button
                 variant='secondary'
                 onClick={() => {
-                  handleCart(product);
+                  handleCart(product, 1);
                 }}
                 active={cartList.some((item) => item.id === product.id)}
               >

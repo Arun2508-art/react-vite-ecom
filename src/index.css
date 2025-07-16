@@ -28,14 +28,14 @@ button {
     vertical-align: middle;
     touch-action: manipulation;
     text-overflow: ellipsis;
-    background-image: linear-gradient(45deg, #0000 50%, currentColor 50%), linear-gradient(135deg, currentColor 50%, #0000 50%);
-    background-position: calc(100% - 20px) calc(1px + 50%), calc(100% - 16.1px) calc(1px + 50%);
+    background-image: url('/images/icon/chevron-down.svg');
     background-repeat: no-repeat;
-    background-size: 4px 4px, 4px 4px;
+    background-position: 95%;
+    background-size: 18px;
     flex-shrink: 1;
     align-items: center;
     gap: 1rem;
-    padding-inline: 0.5rem 1rem;
+    padding-inline: 0.5rem 2rem;
     font-size: .875rem;
     display: inline-flex;
     position: relative
