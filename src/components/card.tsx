@@ -26,7 +26,7 @@ const Card = ({ product, className }: CardProps) => {
 
   return (
     <div className={CardContainerClasses}>
-      <div className='bg-white border border-gray-300 m-3 rounded-lg hover:shadow-md'>
+      <div className='bg-white border border-gray-200 shadow-xl m-3 rounded-lg hover:shadow-2xl'>
         <Link
           to={`/product/${product.category}/${product.id}`}
           className='block overflow-hidden rounded-t-lg relative'
@@ -39,15 +39,16 @@ const Card = ({ product, className }: CardProps) => {
             {product.discountPercentage}% Off
           </div>
         </Link>
-        <div className='pt-0 p-4 flex flex-col gap-2 border-t border-gray-300 group hover:bg-gray-100'>
+        <div className='pt-0 p-4 flex flex-col gap-2 border-t border-gray-200 group hover:bg-gray-100'>
           <div className='relative inline-block pt-4 max-w-xs'>
-            <h1
+            <Link
+              to={`/product/${product.category}/${product.id}`}
               className='max-h-14 line-clamp-1 overflow-hidden cursor-pointer'
               onMouseEnter={() => setShowTooltip(true)}
               onMouseLeave={() => setShowTooltip(false)}
             >
               {product.title}
-            </h1>
+            </Link>
             {showTooltip && (
               <div className='absolute z-10 bg-gray-800 text-white text-xs rounded px-2 py-1 mt-1 whitespace-normal max-w-xs'>
                 {product.title}

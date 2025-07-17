@@ -51,6 +51,9 @@ const ProductDetail = () => {
             <div className='w-full lg:w-2/3 flex flex-col gap-3'>
               <h1 className='text-4xl font-medium'>{selectedProduct?.title}</h1>
               <p className='text-gray-500'>{selectedProduct?.description}</p>
+
+              <div className='h-[2px] bg-gray-100' />
+
               <div className='flex items-center gap-4'>
                 <h2 className='text-2xl text-red-500 font-medium'>
                   ${selectedProduct?.price}
@@ -71,10 +74,12 @@ const ProductDetail = () => {
                   {selectedProduct?.discountPercentage}% OFF
                 </h2>
               </div>
+              <div className='h-[2px] bg-gray-100' />
 
               <Add product={selectedProduct} />
 
               <div className='h-[2px] bg-gray-100' />
+
               <h4 className='font-medium mb-3 text-xl'>Product Details</h4>
               <ProductInfo
                 brand={selectedProduct?.brand}
