@@ -51,7 +51,7 @@ const CartModal = ({ hide }: CardModalProps) => {
   }, [cartList]);
 
   return (
-    <div className='absolute top-12 right-0 p-4 rounded-md shadow-[0_3px_20px_rgb(0,0,0,0.2)] z-20 flex flex-col gap-6 bg-white'>
+    <div className='z-20'>
       <div
         className='fixed top-0 left-0 h-screen bg-black/50 right-[400px]'
         onClick={handleClose}

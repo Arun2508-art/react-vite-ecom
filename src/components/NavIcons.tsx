@@ -31,9 +31,9 @@ const NavIcons = ({ active }: { active: boolean }) => {
   }, [isCartOpen]);
 
   return (
-    <div className={`flex gap-2 xl:gap-6 relative ${active ? 'py-1' : 'py-5'}`}>
+    <div className={`flex gap-2 xl:gap-6 ${active ? 'py-1' : 'py-5'}`}>
       <div
-        className='relative cursor-pointer p-2 hover:text-red-500'
+        className='cursor-pointer p-2 hover:text-red-500'
         onClick={handleCart}
       >
         <span>
